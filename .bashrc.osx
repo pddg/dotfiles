@@ -1,0 +1,32 @@
+# PATH
+export ANDROID_TOOLS=/Users/pudding/Library/Android/sdk/platform-tools
+export GOPATH=/Users/pudding/GoglandProjects
+export PYENV_ROOT=/usr/local/var/pyenv
+export PATH=$PATH:$ANDROID_TOOLS:$PYENV_ROOT/bin:$GOPATH/bin
+
+# bash prompt settings
+## for bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  source $(brew --prefix)/etc/bash_completion
+fi
+
+## `ls -G` colors
+export LSCOLORS=gxfxcxdxbxegedabagacad
+
+## [user@host directory] (branch) $ 
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+source /usr/local/etc/bash_completion.d/git-completion.bash
+GIT_PS1_SHOWDIRTYSTATE=true
+export PS1='\[\033[37m\][\[\033[36m\]\u\[\033[37m\]@\h \[\033[32m\]\W\[\033[37m\]]\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+
+## pyenv
+if which pyenv > /dev/null; then 
+  eval "$(pyenv init -)";
+fi
+
+if which pyenv-virtualenv-init > /dev/null; then
+  eval "$(pyenv virtualenv-init -)"; 
+fi
+
+# added by travis gem
+[ -f /Users/pudding/.travis/travis.sh ] && source /Users/pudding/.travis/travis.sh
