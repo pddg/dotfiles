@@ -12,12 +12,12 @@ esac
 
 # enable common settings
 
-source .bashrc.common
+source $HOME/.bashrc.common
 
 # processing based on PLATFORM
 if [ "$PLATFORM" = "osx" ]; then 
-  source .bashrc.osx
+  source $HOME/.bashrc.osx
 elif [ "$PLATFORM" = "linux" ]; then
-  source .bashrc.linux
+  source $HOME/.bashrc.linux
 fi
 
