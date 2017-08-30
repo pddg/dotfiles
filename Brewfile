@@ -35,11 +35,9 @@ brew "wget"
 mas "Evernote", id: 406056744
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
-mas "Memory Cleaner", id: 748212890
 mas "Night Owl", id: 428834068
 mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
-mas "TweetDeck", id: 485812721
 mas "Twitter", id: 409789998
 mas "VOX", id: 461369673
 mas "Xcode", id: 497799835
