@@ -16,10 +16,8 @@ do
   [[ "$BASENAME" == "Brewfile" ]] && continue
   [[ "$BASENAME" == "Makefile" ]] && continue
   [[ "$BASENAME" =~ .+\.(sh|md|csv) ]] && continue
-  [[ "$BASENAME" == ".git" ]] && continue
+  [[ "$BASENAME" =~ \.git.* ]] && continue
   [[ "$BASENAME" == ".DS_Store" ]] && continue
-  [[ "$BASENAME" == ".gitmodules" ]] && continue
-  [[ "$BASENAME" == ".gitignore" ]] && continue
   ln -si "$FILE" "$HOME"/"$BASENAME"
   echo $BASENAME
   if [ $? -eq 0 ]; then
