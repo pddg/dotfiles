@@ -3,6 +3,8 @@ export ANDROID_TOOLS=/Users/pudding/Library/Android/sdk/platform-tools
 export GOPATH=/Users/pudding/GoglandProjects
 export PYENV_ROOT=/usr/local/var/pyenv
 export PATH=$PATH:$ANDROID_TOOLS:$PYENV_ROOT/bin:$GOPATH/bin
+export XDG_CONFIG_HOME=/Users/pudding/.config
+export XDG_CACHE_HOME=/Users/pudding/.cache
 
 # bash prompt settings
 ## for bash_completion
