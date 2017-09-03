@@ -9,15 +9,21 @@ echo "\$DOTPATH: $DOTPATH"
 
 script_section "Create symbolic links..."
 
-for f in .??*
+for FILE in `find $DOTPATH -type d -name '.git' -prune -o -type f`;
 do
-  [[ "$f" == ".git" ]] && continue
-  [[ "$f" == ".DS_Store" ]] && continue
-  [[ "$f" == ".gitmodules" ]] && continue
-  [[ "$f" == ".gitignore" ]] && continue
-  ln -si "$DOTPATH"/"$f" "$HOME"/"$f"
+  CUT_LENGTH=`expr ${#DOTPATH} + 2`
+  BASENAME=`echo $FILE | cut -c $CUT_LENGTH-`
+  [[ "$BASENAME" == "Brewfile" ]] && continue
+  [[ "$BASENAME" == "Makefile" ]] && continue
+  [[ "$BASENAME" =~ .+\.(sh|md|csv) ]] && continue
+  [[ "$BASENAME" == ".git" ]] && continue
+  [[ "$BASENAME" == ".DS_Store" ]] && continue
+  [[ "$BASENAME" == ".gitmodules" ]] && continue
+  [[ "$BASENAME" == ".gitignore" ]] && continue
+  ln -si "$FILE" "$HOME"/"$BASENAME"
+  echo $BASENAME
   if [ $? -eq 0 ]; then
-    info "\$DOTPATH/$f -> \$HOME/$f"
+    info "\$DOTPATH/$BASENAME -> \$HOME/$BASENAME"
   fi
 done
 
