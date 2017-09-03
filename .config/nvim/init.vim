@@ -9,16 +9,24 @@ set cursorline
 set virtualedit=onemore
 set smartindent
 set showmatch
+set noshowmode
 syntax on
 
 "" font config
 " set ambiwidth=double
 
 "" Tab
-filetype indent on
+set autoindent
+set smartindent
+set cindent
+set smarttab
+
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+filetype indent on
+autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
 
 "" key remap
 nnoremap j gj
@@ -32,11 +40,18 @@ set wrapscan
 set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+" clipboard
+set clipboard+=unnamedplus
+
 " ============== dein =================
-let s:python2_host_path = '/usr/bin/python'
-let s:python3_host_path = '/usr/local/Cellar/python3/3.6.2/bin'
-let g:python_host_prog = system(s:python2_host_path)
-let g:python3_host_prog = system(s:python3_host_path)
+" Pythonインタプリタへのパスを指定
+if has("mac")
+    let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python3'
+    let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
+else
+    let g:python3_host_prog = '/usr/bin/python3'
+    let g:python_host_prog = '/usr/bin/python'
+endif
 
 let s:dein_cache_dir = $XDG_CACHE_HOME . '/dein'
 let s:dein_config_dir = $XDG_CONFIG_HOME . '/nvim'
@@ -86,3 +101,9 @@ set termguicolors
 " Color theme
 colorscheme tender
 
+" for NERDTree
+"" 引数無し起動でNERDTree起動
+autocmd vimenter * if !argc() | NERDTree | endif
+
+"" バッファがないとき自動で閉じる
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
