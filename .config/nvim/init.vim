@@ -43,6 +43,11 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " clipboard
 set clipboard+=unnamedplus
 
+" encodings
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,cp392,sjis,utf-8
+set fileformats=unix,dos,mac
+
 " ============== dein =================
 " Pythonインタプリタへのパスを指定
 if has("mac")
