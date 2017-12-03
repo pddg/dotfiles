@@ -1,6 +1,6 @@
 # PATH
 export ANDROID_TOOLS=/Users/pudding/Library/Android/sdk/platform-tools
-export GOPATH=/Users/pudding/GoglandProjects
+export GOPATH=/Users/pudding/go
 export PYENV_ROOT=/usr/local/var/pyenv
 export PATH=$PATH:$ANDROID_TOOLS:$PYENV_ROOT/bin:$GOPATH/bin
 export XDG_CONFIG_HOME=/Users/pudding/.config
@@ -35,3 +35,7 @@ fi
 
 # added by travis gem
 [ -f /Users/pudding/.travis/travis.sh ] && source /Users/pudding/.travis/travis.sh
+
+# My functions
+alias pcd='cd $(ghq root)/$(ghq list | peco)'
+alias hist='history | peco'
