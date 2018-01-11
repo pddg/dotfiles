@@ -65,3 +65,6 @@ hook_add = '''
 repo = 'Xuyuanp/nerdtree-git-plugin'
 depends = ['vim-fugitive']
 
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
