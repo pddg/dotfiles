@@ -59,6 +59,7 @@ hook_add = '''
     nnoremap <silent> [figitive]s :<C-u>Gstatus<CR>
     nnoremap <silent> [figitive]d :<C-u>Gdiff<CR>
     nnoremap <silent> [figitive]b :<C-u>Gblame<CR>
+    set diffopt+=vertical
 '''
 
 [[plugins]]
@@ -68,3 +69,5 @@ depends = ['vim-fugitive']
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 
+[[plugins]]
+repo = 'Shougo/denite.nvim'

@@ -79,6 +79,9 @@ hook_source = '''
         \ 'command': 'python3'
     \ }
     \}
-    let g:quickrun_no_default_key_mappings = 1
-    nmap <Leader>r :cclose<CR>:write<CR>:QuickRun -mode n<CR>
+    au FileType qf nnoremap <silent><buffer>q :quit<CR>
+    let g:quickrun_no_default_key_mappings = 1 
+    nnoremap <Leader>d :write<CR>:QuickRun -mode n<CR>
+    nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''
+on_ft = ['python']
