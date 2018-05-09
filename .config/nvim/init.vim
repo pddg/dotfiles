@@ -46,8 +46,12 @@ set clipboard+=unnamedplus
 
 " encodings
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,cp392,sjis,utf-8
+set fileencodings=utf-8,euc-jp,cp392,sjis
 set fileformats=unix,dos,mac
+
+" 文字入力バグ
+set ttimeout
+set ttimeoutlen=50
 
 " ============== dein =================
 " Pythonインタプリタへのパスを指定

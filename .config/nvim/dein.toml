@@ -71,8 +71,30 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+hook_add = """
+    hi CursorLine guifg=#E19972
+    " Deniteの設定
+    nnoremap [denite] <Nop>
+    nmap <C-u> [denite]
+
+    " file_rec
+    nnoremap <silent> [denite]f :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+    " -buffer-name=
+    nnoremap <silent> [denite]g  :<C-u>Denite grep -buffer-name=search-buffer-denite<CR>
+
+    " Denite grep検索結果を再表示する
+    nnoremap <silent> [denite]r :<C-u>Denite -resume -buffer-name=search-buffer-denite<CR>
+    " resumeした検索結果の次の行の結果へ飛ぶ
+    nnoremap <silent> [denite]n :<C-u>Denite -resume -buffer-name=search-buffer-denite -select=+1 -immediately<CR>
+    " resumeした検索結果の前の行の結果へ飛ぶ
+    nnoremap <silent> [denite]p :<C-u>Denite -resume -buffer-name=search-buffer-denite -select=-1 -immediately<CR>
+"""
 hook_post_source = '''
     call denite#custom#source('file_rec', 'matcher', ['matcher_cpsm'])
+    call denite#custom#option('default', 'prompt', '>')
+    "C-N,C-Pで上下移動
+    call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+    call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
 '''
 
 [[plugins]]
