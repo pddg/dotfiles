@@ -1,8 +1,9 @@
 # PATH
 export ANDROID_TOOLS=/Users/pudding/Library/Android/sdk/platform-tools
-export GOPATH=/Users/pudding/GoglandProjects
+export GOPATH=/Users/pudding/go
 export PYENV_ROOT=/usr/local/var/pyenv
-export PATH=$PATH:$ANDROID_TOOLS:$PYENV_ROOT/bin:$GOPATH/bin
+export NDENV_ROOT=$HOME/.ndenv
+export PATH=$PATH:$ANDROID_TOOLS:$PYENV_ROOT/bin:$NDENV_ROOT/bin:$GOPATH/bin
 export XDG_CONFIG_HOME=/Users/pudding/.config
 export XDG_CACHE_HOME=/Users/pudding/.cache
 
@@ -33,5 +34,22 @@ if which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)"; 
 fi
 
+## ndenv
+if which ndenv > /dev/null; then
+    eval "$(ndenv init -)";
+fi
+
 # added by travis gem
 [ -f /Users/pudding/.travis/travis.sh ] && source /Users/pudding/.travis/travis.sh
+
+# My functions
+alias pls='cd "$(ls -1d */ | peco)"'
+alias hist='history | peco'
+
+function repo {
+    local dir="$( ghq list -p | peco )"
+    if [ ! -z "$dir" ] ; then
+        cd "$dir"
+    fi
+}
+

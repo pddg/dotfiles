@@ -21,3 +21,6 @@ elif [ "$PLATFORM" = "linux" ]; then
   source $HOME/.bashrc.linux
 fi
 
+
+# added by travis gem
+[ -f /Users/pudding/.travis/travis.sh ] && source /Users/pudding/.travis/travis.sh

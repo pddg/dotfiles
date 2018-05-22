@@ -31,6 +31,7 @@ autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
 "" key remap
 nnoremap j gj
 nnoremap k gk
+let mapleader=","
 
 "" search
 set ignorecase
@@ -43,11 +44,20 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " clipboard
 set clipboard+=unnamedplus
 
+" encodings
+set encoding=utf-8
+set fileencodings=utf-8,euc-jp,cp392,sjis
+set fileformats=unix,dos,mac
+
+" 文字入力バグ
+set ttimeout
+set ttimeoutlen=50
+
 " ============== dein =================
 " Pythonインタプリタへのパスを指定
 if has("mac")
-    let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python3'
-    let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
+    let g:python3_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim3/bin/python3'
+    let g:python_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim2/bin/python'
 else
     let g:python3_host_prog = '/usr/bin/python3'
     let g:python_host_prog = '/usr/bin/python'
