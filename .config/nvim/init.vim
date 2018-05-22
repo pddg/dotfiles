@@ -56,8 +56,8 @@ set ttimeoutlen=50
 " ============== dein =================
 " Pythonインタプリタへのパスを指定
 if has("mac")
-    let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python3'
-    let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
+    let g:python3_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim3/bin/python3'
+    let g:python_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim2/bin/python'
 else
     let g:python3_host_prog = '/usr/bin/python3'
     let g:python_host_prog = '/usr/bin/python'
