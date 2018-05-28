@@ -80,7 +80,7 @@ hook_source = '''
     \ }
     \}
     au FileType qf nnoremap <silent><buffer>q :quit<CR>
-    let g:quickrun_no_default_key_mappings = 1 
+    let g:quickrun_no_default_key_mappings = 1
     nnoremap <Leader>r :write<CR>:QuickRun -mode n<CR>
     nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''

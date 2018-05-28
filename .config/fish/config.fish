@@ -1,5 +1,5 @@
 # Env vars
-set -x GOPATH /Users/pudding/go
+set -x GOPATH $HOME/go
 set -x PYENV_ROOT $HOME/.anyenv/envs/pyenv
 set -x PATH $PYENV_ROOT/bin $GOPATH/bin $PATH
 set -x LANG en_US.UTF-8
