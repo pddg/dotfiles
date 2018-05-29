@@ -1,7 +1,8 @@
 # Env vars
 set -x GOPATH $HOME/go
-set -x PYENV_ROOT $HOME/.anyenv/envs/pyenv
-set -x PATH $PYENV_ROOT/bin $GOPATH/bin $PATH
+# set -x PYENV_ROOT $HOME/.anyenv/envs/pyenv
+# set -x PATH $PYENV_ROOT/bin $GOPATH/bin $PATH
+set -x PATH $GOPATH/bin $PATH
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 set -x XDG_CONFIG_HOME $HOME/.config
@@ -33,3 +34,8 @@ balias vim 'nvim'
 
 set -x PATH $HOME/.anyenv/bin $PATH
 . (anyenv init - fish | psub)
+
+if grep -q Microsoft /proc/version
+    umask 022
+    set -x DISPLAY localhost:0.0
+end

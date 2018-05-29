@@ -23,10 +23,20 @@ repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
 [[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+hook_source = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_smart_case=1
+    inoremap <expr><TAB> pumvisible() ? "\<C-N>" : "\<TAB>"
+'''
+
+[[plugins]]
 repo = 'lervag/vimtex'
 on_ft = ['tex']
+depends = ['deoplete.nvim']
 hook_source = '''
-let g:vimtex_compiler_latexmk = {
+    let g:vimtex_compiler_latexmk = {
       \ 'background': 1,
       \ 'build_dir': '',
       \ 'continuous': 1,
@@ -37,20 +47,7 @@ let g:vimtex_compiler_latexmk = {
       \    '-synctex=1',
       \    '-interaction=nonstopmode',
       \],
-      \}
-
-"let g:vimtex_view_general_viewer
-"      \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-"let g:vimtex_view_general_options = '-r @line @pdf @tex'
-'''
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_i = 1
-hook_source = '''
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#enable_smart_case=1
-    inoremap <expr><TAB> pumvisible() ? "\<C-N>" : "\<TAB>"
+    \}
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}
     endif
