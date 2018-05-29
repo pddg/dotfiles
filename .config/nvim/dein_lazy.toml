@@ -39,9 +39,9 @@ let g:vimtex_compiler_latexmk = {
       \],
       \}
 
-let g:vimtex_view_general_viewer
-      \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
+"let g:vimtex_view_general_viewer
+"      \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+"let g:vimtex_view_general_options = '-r @line @pdf @tex'
 '''
 
 [[plugins]]
@@ -51,6 +51,10 @@ hook_source = '''
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_smart_case=1
     inoremap <expr><TAB> pumvisible() ? "\<C-N>" : "\<TAB>"
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 '''
 
 [[plugins]]
