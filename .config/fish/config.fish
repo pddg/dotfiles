@@ -35,7 +35,7 @@ balias vim 'nvim'
 set -x PATH $HOME/.anyenv/bin $PATH
 . (anyenv init - fish | psub)
 
-if grep -q Microsoft /proc/version
+if test -e /proc/version; and grep -q Microsoft /proc/version
     umask 022
     set -x DISPLAY localhost:0.0
 end
