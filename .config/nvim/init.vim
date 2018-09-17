@@ -53,6 +53,9 @@ set fileformats=unix,dos,mac
 set ttimeout
 set ttimeoutlen=50
 
+" NERDTReeがfishで死ぬ
+set shell=sh
+
 " ============== dein =================
 " Pythonインタプリタへのパスを指定
 let g:python3_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim3/bin/python3'
