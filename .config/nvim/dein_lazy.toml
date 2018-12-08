@@ -62,12 +62,16 @@ depends = ['deoplete.nvim']
 hook_source = '''
     let g:deoplete#sources#go#align_class = 1
     let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-    let g:deoplete#sources#go#package_dot = 1
 '''
 
 [[plugins]]
 repo = 'fatih/vim-go'
 on_ft = ['go']
+hook_source = '''
+    let g:go_gocode_unimported_packages = 1
+    let g:go_fmt_command = "goimports"
+    let g:deoplete#sources#go#package_dot = 1
+'''
 
 [[plugins]]
 repo = 'zchee/deoplete-jedi'
@@ -118,3 +122,7 @@ hook_source = '''
     nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''
 on_ft = ['python']
+
+[[plugins]]
+repo = 'chase/vim-ansible-yaml'
+on_ft = ['yaml']
