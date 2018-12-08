@@ -32,10 +32,14 @@ set -g theme_display_cmd_duration no
 # alias
 balias vim 'nvim'
 
-set -x PATH $HOME/.anyenv/bin $PATH
-. (anyenv init - fish | psub)
+if test -d $HOME/.anyenv
+    set -x PATH $HOME/.anyenv/bin $PATH
+    . (anyenv init - fish | psub)
+end
 
-if grep -q Microsoft /proc/version
-    umask 022
-    set -x DISPLAY localhost:0.0
+if test -f /proc/version
+    if grep -q Microsoft /proc/version
+        umask 022
+        set -x DISPLAY localhost:0.0
+    end
 end
