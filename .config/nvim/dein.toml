@@ -35,10 +35,6 @@ hook_add = '''
     let g:airline#extensions#tabline#buffer_idx_mode = 1
     let g:airline#extensions#virtualenv#enabled = 1
     let g:airline#extensions#whitespace#mixed_indent_algo = 1 	
-    "let g:airline_left_sep = '⮀'
-    "let g:airline_left_alt_sep = '⮁'
-    "let g:airline_right_sep = '⮂'
-    "let g:airline_right_alt_sep = '⮃'
 ''' 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
@@ -55,7 +51,7 @@ hook_add = '''
 repo = 'tpope/vim-fugitive'
 hook_add = '''
     nnoremap [figitive] <Nop>
-    nnoremap <Leader>g [figitive]
+    nnoremap <Leader>i [figitive]
     nnoremap <silent> [figitive]s :<C-u>Gstatus<CR>
     nnoremap <silent> [figitive]d :<C-u>Gdiff<CR>
     nnoremap <silent> [figitive]b :<C-u>Gblame<CR>

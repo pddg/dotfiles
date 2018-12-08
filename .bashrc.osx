@@ -1,9 +1,8 @@
 # PATH
 export ANDROID_TOOLS=/Users/pudding/Library/Android/sdk/platform-tools
 export GOPATH=/Users/pudding/go
-export PYENV_ROOT=/usr/local/var/pyenv
 export NDENV_ROOT=$HOME/.ndenv
-export PATH=$PATH:$ANDROID_TOOLS:$PYENV_ROOT/bin:$NDENV_ROOT/bin:$GOPATH/bin
+export PATH=/usr/local/opt/openssl/bin:$PATH:$ANDROID_TOOLS:$GOPATH/bin
 export XDG_CONFIG_HOME=/Users/pudding/.config
 export XDG_CACHE_HOME=/Users/pudding/.cache
 

@@ -2,7 +2,7 @@
 
 . ./bin/func.sh
 
-DOTPATH=$HOME/dotfiles
+DOTPATH=$HOME/ghq/github.com/pddg/dotfiles
 
 echo "\$HOME: $HOME"
 echo "\$DOTPATH: $DOTPATH"
