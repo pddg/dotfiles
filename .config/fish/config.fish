@@ -35,9 +35,8 @@ if type nvim > /dev/null 2>&1
     balias vim 'nvim'
 end
 
-set -x ANYENV_HOME $HOME/.anyenv
-if test -d $ANYENV_HOME
-    set -x PATH $ANYENV_HOME/bin $PATH
+if test -d $HOME/.anyenv
+    set -x PATH $HOME/.anyenv/bin $PATH
     . (anyenv init - fish | psub)
 end
 
