@@ -1,0 +1,25 @@
+\documentclass{jarticle}
+\usepackage{otf}
+\usepackage{empheq}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{main.bib}
+\DeclareSortingTemplate{mysorting}{
+    \sort{\citeorder}
+    \sort{\field{sortname} \field{author} \field{translator} \field{editor}}
+}
+\ExecuteBibliographyOptions{sorting=mysorting}
+
+\begin{document}
+
+\title{{{_input_:title}}}
+\author{國領正真}
+\maketitle
+
+\section{{{_cursor_}}}
+
+
+
+\end{document}

@@ -1,7 +1,11 @@
 # Env vars
 set -x GOPATH $HOME/go
-# set -x PYENV_ROOT $HOME/.anyenv/envs/pyenv
-set -x PATH $GOPATH/bin $PATH
+set -x APP_ENGINE_SDK_PATH /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/platform/google_appengine
+set -x POETRY_ROOT $HOME/.poetry
+if test -d $POETRY_ROOT
+    set -x PATH $POETRY_ROOT/bin $PATH
+end
+set -x PATH $GOPATH/bin $APP_ENGINE_SDK_PATH $PATH
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 set -x XDG_CONFIG_HOME $HOME/.config
@@ -35,22 +39,11 @@ if type nvim > /dev/null 2>&1
     balias vim 'nvim'
 end
 
-if test -d $HOME/.anyenv
-    set -x PATH $HOME/.anyenv/bin $PATH
-    . (anyenv init - fish | psub)
+if type anyenv > /dev/null 2>&1
+    source (anyenv init - fish | psub)
 end
 
 if test -e /proc/version; and grep -q Microsoft /proc/version
     umask 022
     set -x DISPLAY localhost:0.0
-end
-
-if test -d /usr/local/opt/mysql-client/bin
-    set -x PATH /usr/local/opt/mysql-client/bin $PATH
-end 
-
-if type pyenv > /dev/null 2>&1
-    if pyenv global | grep miniconda > /dev/null 2>&1 or; pyenv local | grep miniconda > /dev/null 2>&1
-        source (conda info --root)/etc/fish/conf.d/conda.fish
-    end
 end

@@ -51,4 +51,5 @@ function repo {
         cd "$dir"
     fi
 }
+bind -x '"\C-g": repo'
 

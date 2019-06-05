@@ -18,7 +18,7 @@ do
   [[ "$BASENAME" =~ .+\.(sh|md|csv) ]] && continue
   [[ "$BASENAME" =~ \.git.* ]] && continue
   [[ "$BASENAME" == ".DS_Store" ]] && continue
-  ln -si "$FILE" "$HOME"/"$BASENAME"
+  ln -sf "$FILE" "$HOME"/"$BASENAME"
   echo $BASENAME
   if [ $? -eq 0 ]; then
     info "\$DOTPATH/$BASENAME -> \$HOME/$BASENAME"
