@@ -48,8 +48,14 @@ set -x fish_color_operator 9ae204
 
 if type nvim > /dev/null 2>&1
     # alias
-	balias vim "nvim"
+	alias vim nvim
 end
+
+alias ec envchain
+balias tf terraform
+balias k kubectl
+balias kc kubectx
+balias kns kubens
 
 if type anyenv > /dev/null 2>&1
     source (anyenv init - fish | psub)
@@ -58,4 +64,9 @@ end
 if test -e /proc/version; and grep -q Microsoft /proc/version
     umask 022
     set -x DISPLAY localhost:0.0
+end
+
+# Load .envrc automatically
+if type direnv > /dev/null 2>&1
+    direnv hook fish | source
 end

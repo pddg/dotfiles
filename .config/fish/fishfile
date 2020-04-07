@@ -4,3 +4,4 @@ oh-my-fish/theme-bobthefish
 decors/fish-ghq
 oh-my-fish/plugin-vcs
 fisherman/z
+evanlucas/fish-kubectl-completions
