@@ -33,6 +33,13 @@ nnoremap j gj
 nnoremap k gk
 let mapleader=","
 
+"" Buffer
+set hidden
+nnoremap <silent>J :bnext<CR>
+nnoremap <silent>K :bprevious<CR>
+nnoremap <silent>bb :b#<CR>
+nnoremap <silent>Q :bdelete<CR>
+
 "" search
 set ignorecase
 set smartcase
@@ -109,9 +116,6 @@ set termguicolors
 " Color theme
 colorscheme tender
 
-" for NERDTree
-"" 引数無し起動でNERDTree起動
-autocmd vimenter * if !argc() | NERDTree | endif
-
-"" バッファがないとき自動で閉じる
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" for Defx
+"" 引数無し起動でDefx起動
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Defx | endif
