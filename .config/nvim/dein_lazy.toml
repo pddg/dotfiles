@@ -34,18 +34,6 @@ hook_source = '''
         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 '''
 
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-on_i = 1
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_i = 1
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-on_i = 1
-
 [[plugns]]
 repo = 'lighttiger2505/deoplete-vim-lsp'
 on_i = 1

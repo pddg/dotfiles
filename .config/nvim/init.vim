@@ -118,4 +118,3 @@ colorscheme tender
 
 " for Defx
 "" 引数無し起動でDefx起動
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Defx | endif
