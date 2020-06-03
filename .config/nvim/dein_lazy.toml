@@ -34,9 +34,10 @@ hook_source = '''
         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 '''
 
-[[plugns]]
+[[plugins]]
 repo = 'lighttiger2505/deoplete-vim-lsp'
 on_i = 1
+depends = ['deoplete.nvim']
 
 [[plugins]]
 repo = 'plytophogy/vim-virtualenv'

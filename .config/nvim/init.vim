@@ -57,11 +57,10 @@ set fileencodings=utf-8,euc-jp,cp392,sjis
 set fileformats=unix,dos,mac
 
 " 文字入力バグ
-set ttimeout
-set ttimeoutlen=50
-
-" NERDTReeがfishで死ぬ
-set shell=sh
+" set ttimeout
+" set ttimeoutlen=50
+" https://github.com/johndgiese/dotvim/issues/4#issuecomment-442151962
+set t_BE=
 
 " ============== dein =================
 " Pythonインタプリタへのパスを指定
@@ -115,6 +114,8 @@ set termguicolors
 
 " Color theme
 colorscheme tender
-
-" for Defx
-"" 引数無し起動でDefx起動
+" 起動時に謎の入力が入る原因はこれ？
+" https://github.com/neovim/neovim/issues/11393
+" とりあえず以下のワークアラウンドを試してみる
+" https://github.com/neovim/neovim/issues/11393#issuecomment-634454128
+cnoremap 3636 <c-u>undo<CR>

@@ -46,6 +46,9 @@ repo = 'prabirshrestha/async.vim'
 repo = 'prabirshrestha/vim-lsp'
 
 [[plugins]]
+repo = 'mattn/vim-goimports'
+
+[[plugins]]
 repo = 'mattn/vim-lsp-settings'
 
 [[plugins]]
@@ -127,10 +130,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Xuyuanp/nerdtree-git-plugin'
-depends = ['vim-fugitive']
-
-[[plugins]]
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
@@ -189,6 +188,7 @@ hook_add = """
           \ 'ag',
           \ '--follow',
           \ '--ignore-case',
+          \ '--hidden',
           \ '--nocolor',
           \ '--nogroup',
           \ '-g',
