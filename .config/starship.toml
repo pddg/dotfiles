@@ -1,0 +1,3 @@
+[directory]
+truncate_length = 3
+truncate_to_repo = false
