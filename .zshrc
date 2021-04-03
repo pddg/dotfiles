@@ -77,21 +77,6 @@ bindkey '^X^P' predict-on
 bindkey '^O' predict-off
 zstyle ':predict' verbose true
 
-### Prompts
-
-PROMPT='%F{green}%m:%f%F{blue}%~%f ${vcs_info_msg_0_}
-%(?.%(!.#.$).%F{red}!%f) '
-PROMPT2="> "
-
-setopt prompt_subst
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:*' unstagedstr "%F{red}*"
-# 
-zstyle ':vcs_info:*' formats "%F{green}%c%u%b%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
-
 ### Plugins
 
 zinit load momo-lab/zsh-abbrev-alias
@@ -140,4 +125,8 @@ bindkey '^g' peco-src
 # https://github.com/kubernetes/kubectl/issues/125
 if type kubectl > /dev/null 2>&1 ; then
     source <(kubectl completion zsh | sed /_bash_comp/d)
+fi
+
+if type starship > /dev/null 2>&1 ; then
+    eval "$(starship init zsh)"
 fi
