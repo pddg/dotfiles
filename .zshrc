@@ -79,7 +79,7 @@ zstyle ':predict' verbose true
 
 ### Prompts
 
-PROMPT='%F{green}%m:%f%F{blue}%~%f ${vcs_info_msg_0_} $(kube_ps1)
+PROMPT='%F{green}%m:%f%F{blue}%~%f ${vcs_info_msg_0_}
 %(?.%(!.#.$).%F{red}!%f) '
 PROMPT2="> "
 
@@ -91,23 +91,6 @@ zstyle ':vcs_info:*' unstagedstr "%F{red}*"
 zstyle ':vcs_info:*' formats "%F{green}%c%u%b%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
-
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-KUBE_PS1_CTX_COLOR="magenta"
-KUBE_PS1_PREFIX=""
-KUBE_PS1_SUFFIX=""
-KUBE_PS1_SEPARATOR=""
-KUBE_PS1_SYMBOL_ENABLE=false
-
-function get_cluster_short() {
-    fullClusterName="$1"
-    if [[ $fullClusterName =~ ^gke\_.* ]]; then
-        echo " $(echo $fullClusterName | cut -d _ -f2)"
-    else
-        echo $fullClusterName
-    fi
-}
-KUBE_PS1_CLUSTER_FUNCTION=get_cluster_short
 
 ### Plugins
 
@@ -157,12 +140,4 @@ bindkey '^g' peco-src
 # https://github.com/kubernetes/kubectl/issues/125
 if type kubectl > /dev/null 2>&1 ; then
     source <(kubectl completion zsh | sed /_bash_comp/d)
-fi
-
-# 現在のcontextが空のとき表示を消す
-if type kubectx > /dev/null 2>&1 ; then
-    kube_current_ctx=$(kubectx -c 2>&1)
-    if [ $? != 0 ]; then
-        kubeoff
-    fi
 fi
