@@ -24,23 +24,6 @@ export PS1='\[\033[37m\][\[\033[36m\]\u\[\033[37m\]@\h \[\033[32m\]\W\[\033[37m\
 # aliases
 alias vim='nvim'
 
-## pyenv
-if which pyenv > /dev/null; then 
-  eval "$(pyenv init -)";
-fi
-
-if which pyenv-virtualenv-init > /dev/null; then
-  eval "$(pyenv virtualenv-init -)"; 
-fi
-
-## ndenv
-if which ndenv > /dev/null; then
-    eval "$(ndenv init -)";
-fi
-
-# added by travis gem
-[ -f /Users/pudding/.travis/travis.sh ] && source /Users/pudding/.travis/travis.sh
-
 # My functions
 alias pls='cd "$(ls -1d */ | peco)"'
 alias hist='history | peco'

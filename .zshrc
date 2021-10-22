@@ -88,11 +88,6 @@ zinit ice wait'!0'; zinit load zsh-users/zsh-completions
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-### Anyenv
-if  type anyenv > /dev/null 2>&1  ; then
-    eval "$(anyenv lazyload)"
-fi
-
 ### Environment variables
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
@@ -125,6 +120,24 @@ bindkey '^g' peco-src
 # https://github.com/kubernetes/kubectl/issues/125
 if type kubectl > /dev/null 2>&1 ; then
     source <(kubectl completion zsh | sed /_bash_comp/d)
+fi
+
+if [ -d ${HOME}/.asdf ]; then
+    . ${HOME}/.asdf/asdf.sh
+fi
+
+GCLOUD_SDK_PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+if [ -d ${GCLOUD_SDK_PATH} ]; then
+    source "${GCLOUD_SDK_PATH}/path.zsh.inc"
+    source "${GCLOUD_SDK_PATH}/completion.zsh.inc"
+fi
+
+if [ -d "${HOME}/.cargo" ]; then
+    source "${HOME}/.cargo/env"
+fi
+
+if type direnv > /dev/null 2>&1 ; then
+    eval "$(direnv hook zsh)"
 fi
 
 if type starship > /dev/null 2>&1 ; then
