@@ -126,6 +126,11 @@ if [ -d ${HOME}/.asdf ]; then
     . ${HOME}/.asdf/asdf.sh
 fi
 
+if [ -d ${HOME}/.deno ]; then
+    export DENO_INSTALL="/home/pudding/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
 GCLOUD_SDK_PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 if [ -d ${GCLOUD_SDK_PATH} ]; then
     source "${GCLOUD_SDK_PATH}/path.zsh.inc"
