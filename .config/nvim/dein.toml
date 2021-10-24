@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'Shougo/dein.vim'
-
-[[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
     if dein#util#_is_windows()
@@ -134,7 +131,7 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-hook_add = """
+hook_add = '''
     " Deniteの設定
     nnoremap [denite] <Nop>
     nmap <C-u> [denite]
@@ -217,7 +214,8 @@ hook_add = """
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Defx | endif
     autocmd FileType denite set winblend=5
     autocmd FileType denite-filter set winblend=5
-"""
+'''
+
 hook_post_source = '''
     call denite#custom#source('file/rec', 'matcher', ['matcher_cpsm'])
     "C-N,C-Pで上下移動

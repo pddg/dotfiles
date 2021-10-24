@@ -1,86 +1,84 @@
-[[plugins]]
-repo = 'tpope/vim-markdown'
-on_ft = ['md']
+# Mathcer for ddc.vim
 
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml']
+repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
+
+# Sorter for ddc.vim
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i  = 1
+repo = 'Shougo/ddc-sorter_rank'
+on_source = 'ddc.vim'
+
+# Sources for ddc.vim
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
+repo = 'LumaKernel/ddc-file'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+on_source = 'ddc.vim'
+depends = ['vim-lsp']
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+depends = ['denops.vim']
+on_event = 'InsertEnter'
 hook_source = '''
-  imap <C-b> <Plug>(neosnippet_expand_or_jump)
-  smap <C-b> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-b> <Plug>(neosnippet_expand_target)
-  if has('conceal')
-    set conceallevel=0 concealcursor=niv
-  endif
-'''
-on_i  = 1
-on_ft = ['snippet']
-depends = ['neosnippet-snippets']
+  call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'file', 'deoppet'])
 
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_i = 1
-hook_source = '''
-    let g:deoplete#enable_at_startup = 1
-    inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-        \ neosnippet#expandable_or_jumpable() ?
-        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-
-[[plugins]]
-repo = 'lighttiger2505/deoplete-vim-lsp'
-on_i = 1
-depends = ['deoplete.nvim']
-
-[[plugins]]
-repo = 'plytophogy/vim-virtualenv'
-on_ft = ['python']
-
-[[plugins]]
-repo = 'cohama/lexima.vim'
-on_i = 1
-
-[[plugins]]
-repo = 'lambdalisue/vim-gista'
-on_cmd = 'Gista'
-hook_source = '''
-    let g:gista#client#default_username = 'pddg'
-'''
-
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-hook_source = '''
-    let g:quickrun_config = {
-    \ '_' : {
-        \ 'runner' : 'vimproc',
-        \ 'runner/vimproc/updatetime' : 40,
-        \ 'outputter' : 'error',
-        \ 'outputter/error/success' : 'buffer',
-        \ 'outputter/error/error'   : 'quickfix',
-        \ 'outputter/buffer/split' : ':botright 8sp',
+  call ddc#custom#patch_global('sourceOptions', {
+    \ '_': {
+    \   'matchers': ['matcher_head'],
+    \   'sorters': ['sorter_rank'],
     \ },
-    \ 'python': {
-        \ 'command': 'python3'
-    \ }
-    \}
-    au FileType qf nnoremap <silent><buffer>q :quit<CR>
-    let g:quickrun_no_default_key_mappings = 1
-    nnoremap <Leader>r :write<CR>:QuickRun -mode n<CR>
-    nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+    \ 'around': {'mark': 'A'},
+    \ 'file': {
+    \   'mark': 'F',
+    \   'isVolatile': v:true,
+    \   'forceCompletionPattern': '\S/\S*',
+    \ },
+    \ 'vim-lsp': {
+    \   'mark': 'LSP',
+    \   'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+    \ },
+    \ 'deoppet': {'mark': 'dp', 'dup': v:true},
+    \ })
+ 
+  call ddc#custom#patch_global('sourceParams', {
+    \ 'around': {'maxSize': 500},
+    \ 'file': {'smartCase': v:true},
+    \ })
+
+  " <TAB>: completion.
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? '<C-n>' :
+    \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+    \ '<TAB>' : ddc#map#manual_complete()
+  
+  " <S-TAB>: completion back.
+  inoremap <expr><S-TAB> pumvisible() ? "<C-p>" : "<C-h>"
+
+  " 補完ウィンドウでEnter押したときに改行を挿入しない
+  inoremap <expr><CR> pumvisible() ? "<C-y>" : "<CR>"
+
+  " 補完ウィンドウでC-j/kで候補を移動する
+  " inoremap <expr><C-j> pumvisible() ? "<Down>" : "<C-j>"
+  " inoremap <expr><C-k> pumvisible() ? "<Up>" : "<C-k>"
+ 
+  call ddc#enable()
 '''
-on_ft = ['python']
 
 [[plugins]]
-repo = 'chase/vim-ansible-yaml'
-on_ft = ['yaml', 'yml']
+repo = 'higashi000/dps-kakkonan'
+depends = ['denops.vim']
+on_event = 'InsertEnter'
 
-[[plugins]]
-repo = 'Glench/Vim-Jinja2-Syntax'
-on_ft = ['j2']

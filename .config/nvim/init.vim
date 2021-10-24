@@ -63,16 +63,11 @@ set fileformats=unix,dos,mac
 set t_BE=
 
 " ============== dein =================
-" Pythonインタプリタへのパスを指定
-let g:python3_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim3/bin/python3'
-let g:python_host_prog = $HOME . '/.anyenv/envs/pyenv/versions/neovim2/bin/python'
-
 let s:dein_cache_dir = $XDG_CACHE_HOME . '/dein'
 let s:dein_config_dir = $XDG_CONFIG_HOME . '/nvim'
 let s:dein_repo_dir = s:dein_cache_dir . '/repos/github.com/Shougo/dein.vim'
 let s:toml = s:dein_config_dir . '/dein.toml'
 let s:toml_lazy = s:dein_config_dir . '/dein_lazy.toml'
-
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -95,7 +90,7 @@ if dein#load_state(s:dein_cache_dir)
   
   " Required:
   call dein#end()
-  call dein#save_state()
+  call dein#save_state() 
 endif
 
 " Required:
