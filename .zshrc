@@ -5,7 +5,7 @@
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -13,13 +13,6 @@ fi
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
 autoload -Uz colors && colors
@@ -65,7 +58,8 @@ setopt AUTO_PARAM_KEYS
 setopt inc_append_history
 
 
-zstyle ':completion::complete:*' use-cache true
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "${LS_COLORS}"
@@ -114,16 +108,15 @@ function peco-src () {
 zle -N peco-src
 bindkey '^g' peco-src
 
-# Completion
-# なんかここで127で死ぬ。
-# https://github.com/kubernetes/kubernetes/pull/88165
-# https://github.com/kubernetes/kubectl/issues/125
-if type kubectl > /dev/null 2>&1 ; then
-    source <(kubectl completion zsh | sed /_bash_comp/d)
+if [ -d "/usr/local/go" ]; then
+    export PATH="/usr/local/go/bin:${PATH}"
 fi
 
-if [ -d ${HOME}/.asdf ]; then
-    . ${HOME}/.asdf/asdf.sh
+AQUA_ROOT_DIR=${HOME}/.local/share/aquaproj-aqua
+if [ -d ${AQUA_ROOT_DIR} ]; then
+    export PATH="${AQUA_ROOT_DIR}/bin:${PATH}"
+    export AQUA_GLOBAL_CONFIG=${HOME}/.config/aquaproj-aqua/aqua.yaml
+    export AQUA_EXPERIMENTAL_X_SYS_EXEC=true
 fi
 
 if [ -d ${HOME}/.deno ]; then
@@ -144,6 +137,14 @@ fi
 if type direnv > /dev/null 2>&1 ; then
     eval "$(direnv hook zsh)"
 fi
+
+if type bazelisk > /dev/null 2>&1 ; then
+    alias bazel='bazelisk'
+fi
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if type starship > /dev/null 2>&1 ; then
     eval "$(starship init zsh)"

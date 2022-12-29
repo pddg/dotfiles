@@ -26,14 +26,11 @@ on_source = 'ddc.vim'
 depends = ['vim-lsp']
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-
-[[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim']
 on_event = 'InsertEnter'
 hook_source = '''
-  call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'file', 'deoppet'])
+  call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'file'])
 
   call ddc#custom#patch_global('sourceOptions', {
     \ '_': {
@@ -49,8 +46,6 @@ hook_source = '''
     \ 'vim-lsp': {
     \   'mark': 'LSP',
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-    \ },
-    \ 'deoppet': {'mark': 'dp', 'dup': v:true},
     \ })
  
   call ddc#custom#patch_global('sourceParams', {

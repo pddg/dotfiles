@@ -62,6 +62,9 @@ set fileformats=unix,dos,mac
 " https://github.com/johndgiese/dotvim/issues/4#issuecomment-442151962
 set t_BE=
 
+" マウス操作を持って行かれる
+set mouse=
+
 " ============== dein =================
 let s:dein_cache_dir = $XDG_CACHE_HOME . '/dein'
 let s:dein_config_dir = $XDG_CONFIG_HOME . '/nvim'
