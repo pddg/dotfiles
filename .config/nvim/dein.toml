@@ -83,7 +83,6 @@ repo = 'Shougo/ddu-filter-matcher_substring'
 
 [[plugins]]
 repo = 'Shougo/ddu.vim'
-depends = ['vim-denops/denops.vim']
 hook_add = '''
     call ddu#custom#patch_global({
         \   'ui': 'filer',
@@ -122,15 +121,19 @@ hook_add = '''
     nnoremap <silent>fi :<C-u>call ddu#start({
         \   'ui': 'filer',
         \   'sourceOptions': {
-        \     'columns': ['icon_filename'],
+        \     'file': {
+        \       'columns': ['icon_filename'],
+        \     },
         \   },
         \ })<CR>
-    nnoremap <silent>fg :<C-u>call ddu#start({
+    nnoremap <silent>fl :<C-u>call ddu#start({
         \   'ui': 'ff', 
         \   'resume': v:true,
         \   'sources': [{'name': 'file_rec', 'params': {}}],
         \   'sourceOptions': {
-        \     'columns': ['filename'],
+        \     'file': {
+        \       'columns': ['filename'],
+        \     },
         \   },
         \ })<CR>
 
