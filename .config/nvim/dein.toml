@@ -111,6 +111,11 @@ hook_add = '''
         \       'matchers': ['matcher_substring'],
         \     },
         \   },
+        \   'actionOptions': {
+        \     'narrow': {
+        \       'quit': v:false,
+        \     },
+        \   },
         \   'kindOptions': {
         \     'file': {
         \       'defaultAction': 'open',
@@ -162,10 +167,8 @@ hook_add = '''
     autocmd FileType ddu-filer call s:ddu_filer_settings()
     function! s:ddu_filer_settings() abort
         " Enterでディレクトリ移動 or ファイルを開く
-        nnoremap <buffer><silent><expr> <CR>
-            \ ddu#ui#filer#is_tree() ?
-            \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow'})<CR>" :
-            \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'open'})<CR>"
+        nnoremap <buffer> <CR>
+            \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
         " Spaceで選択アイテムをトグル
         nnoremap <buffer><silent> <Space>
             \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
