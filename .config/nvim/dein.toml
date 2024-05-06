@@ -82,6 +82,9 @@ repo = 'Shougo/ddu-kind-file'
 repo = 'Shougo/ddu-filter-matcher_substring'
 
 [[plugins]]
+repo = 'shun/ddu-source-rg'
+
+[[plugins]]
 repo = 'Shougo/ddu.vim'
 hook_add = '''
     call ddu#custom#patch_global({
@@ -105,10 +108,17 @@ hook_add = '''
         \       'previewWidth': 120,
         \     },
         \   },
-        \   'sources': [{'name': 'file', 'params': {}}],
+        \   'sources': [
+        \     {'name': 'file'},
+        \   ],
         \   'sourceOptions': {
         \     '_': {
         \       'matchers': ['matcher_substring'],
+        \     },
+        \   },
+        \   'sourceParams': {
+        \     'rg': {
+        \       'args': ['--json'],
         \     },
         \   },
         \   'actionOptions': {
@@ -134,12 +144,25 @@ hook_add = '''
     nnoremap <silent>fl :<C-u>call ddu#start({
         \   'ui': 'ff', 
         \   'resume': v:true,
-        \   'sources': [{'name': 'file_rec', 'params': {}}],
+        \   'sources': [{'name': 'file_rec'}],
         \   'sourceOptions': {
         \     'file': {
         \       'columns': ['filename'],
         \     },
         \   },
+        \ })<CR>
+
+    nnoremap <silent>fg :<C-u>call ddu#start({
+        \   'ui': 'ff',
+        \   'volatile': v:true,
+        \   'resume': v:true,
+        \   'sources': [{
+        \     'name': 'rg',
+        \     'options': {
+        \       'matchers': [],
+        \       'volatile': v:true,
+        \     },
+        \   }],
         \ })<CR>
 
     autocmd FileType ddu-ff call s:ddu_ff_settings()
@@ -167,39 +190,42 @@ hook_add = '''
     autocmd FileType ddu-filer call s:ddu_filer_settings()
     function! s:ddu_filer_settings() abort
         " Enterでディレクトリ移動 or ファイルを開く
-        nnoremap <buffer> <CR>
-            \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+        " \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
+        nnoremap <buffer><silent><expr> <CR>
+            \ ddu#ui#get_item()->get('isTree', v:false) ?
+            \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow'})<CR>" :
+            \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'open'})<CR>"
         " Spaceで選択アイテムをトグル
         nnoremap <buffer><silent> <Space>
-            \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+            \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
         " oでその場でディレクトリを展開
         nnoremap <buffer> o
-            \ <Cmd>call ddu#ui#filer#do_action('expandItem', {'mode': 'toggle'})<CR>
+            \ <Cmd>call ddu#ui#do_action('expandItem', {'mode': 'toggle'})<CR>
         " qで終了
         nnoremap <buffer><silent> q
-            \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+            \ <Cmd>call ddu#ui#do_action('quit')<CR>
         " hでディレクトリを遡る
         nnoremap <buffer><silent> h
-            \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
+            \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
         " lでディレクトリに入る
         nnoremap <buffer><silent><expr> l
-            \ ddu#ui#filer#is_tree() ?
-            \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow'})<CR>" :
-            \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'open'})<CR>"
+            \ ddu#ui#get_item()->get('isTree', v:false) ?
+            \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow'})<CR>" :
+            \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'open'})<CR>"
         " ファイル操作系
         nnoremap <buffer><silent> K \
-            \ <Cmd>call ddu#ui#filer#do_action('newDirectory')<CR>
+            \ <Cmd>call ddu#ui#do_action('newDirectory')<CR>
         nnoremap <buffer><silent> N \
-            \ <Cmd>call ddu#ui#filer#do_action('newFile')<CR>
+            \ <Cmd>call ddu#ui#do_action('newFile')<CR>
         nnoremap <buffer><silent> d \
-            \ <Cmd>call ddu#ui#filer#do_action('delete')<CR>
+            \ <Cmd>call ddu#ui#do_action('delete')<CR>
         nnoremap <buffer><silent> r \
-            \ <Cmd>call ddu#ui#filer#do_action('rename')<CR>
+            \ <Cmd>call ddu#ui#do_action('rename')<CR>
         nnoremap <buffer><silent> c \
-            \ <Cmd>call ddu#ui#filer#do_action('copy')<CR>
+            \ <Cmd>call ddu#ui#do_action('copy')<CR>
         nnoremap <buffer><silent> p \
-            \ <Cmd>call ddu#ui#filer#do_action('paste')<CR>
+            \ <Cmd>call ddu#ui#do_action('paste')<CR>
         nnoremap <buffer><silent> m \
-            \ <Cmd>call ddu#ui#filer#do_action('move')<CR>
+            \ <Cmd>call ddu#ui#do_action('move')<CR>
     endfunction
 '''

@@ -112,10 +112,6 @@ if [ -d "/usr/local/go" ]; then
     export PATH="/usr/local/go/bin:${PATH}"
 fi
 
-if [ -f $HOME/.asdf/asdf.sh ]; then
-    . $HOME/.asdf/asdf.sh
-fi
-
 AQUA_ROOT_DIR=${HOME}/.local/share/aquaproj-aqua
 if [ -d ${AQUA_ROOT_DIR} ]; then
     export PATH="${AQUA_ROOT_DIR}/bin:${PATH}"
