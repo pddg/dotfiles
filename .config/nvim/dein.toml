@@ -168,23 +168,23 @@ hook_add = '''
     autocmd FileType ddu-ff call s:ddu_ff_settings()
     function! s:ddu_ff_settings() abort
         nnoremap <buffer><silent> <CR>
-            \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+            \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
         nnoremap <buffer><silent> i
-            \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+            \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
         nnoremap <buffer><silent> q
-            \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+            \ <Cmd>call ddu#ui#do_action('quit')<CR>
         nnoremap <buffer><silent> p
-            \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+            \ <Cmd>call ddu#ui#do_action('preview')<CR>
     endfunction
 
     autocmd FileType ddu-ff-filter call s:ddu_ff_filter_settings()
     function! s:ddu_ff_filter_settings() abort
         inoremap <buffer><silent> <CR>
-            \ <Esc><C-w>k
+            \ <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
         nnoremap <buffer><silent> <CR>
-            \ <Cmd>close<CR>
+            \ <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
         nnoremap <buffer><silent> q
-            \ <Cmd>close<CR>
+            \ <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
     endfunction
 
     autocmd FileType ddu-filer call s:ddu_filer_settings()
